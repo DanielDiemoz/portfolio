@@ -45,18 +45,8 @@ const SERVICES = [
   { n: "05", title: "Web Design", desc: "Siti editoriali, portfolio, landing page che convertono." },
 ];
 
-const SKILLS = [
-  "UI Design",
-  "UX Research", 
-  "Prototipazione",
-  "Design System",
-  "Motion Design",
-  "Art Direction",
-  "Identità Visiva",
-  "Tipografia",
-  "Interaction Design",
-  "Web Design",
-];
+const SKILLS = ["Figma", "Webflow", "Framer", "After Effects", "Design Systems", "Motion", "Strategia", "Typography", "Art Direction", "Brand Identity"];
+
 function Index() {
   return (
     <div id="top" className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -272,7 +262,7 @@ function Services() {
         <div className="flex animate-marquee whitespace-nowrap">
           {[...SKILLS, ...SKILLS, ...SKILLS].map((s, i) => (
             <span key={i} className="font-display text-5xl md:text-7xl px-8 flex items-center gap-8 leading-none">
-              {s} <span className="text-muted-foreground">·</span>
+              {s} <span className="text-muted-foreground">✱</span>
             </span>
           ))}
         </div>
@@ -352,11 +342,11 @@ function Contact() {
           <div className="grid grid-cols-2 gap-8">
             <RevealOnScroll>
               <div className="font-mono-cap text-muted-foreground mb-2">Telefono</div>
-              <a href="tel:+393382313527" className="text-xl" data-cursor-hover>+39 338 23 13 527</a>
+              <a href="tel:+393382313527" className="text-xl" data-cursor-hover>+39 333 12 34 567</a>
             </RevealOnScroll>
             <RevealOnScroll delay={0.1}>
               <div className="font-mono-cap text-muted-foreground mb-2">WhatsApp</div>
-              <a href="https://wa.me/393382313527" className="text-xl" data-cursor-hover>Scrivimi →</a>
+              <a href="https://wa.me/393331234567" className="text-xl" data-cursor-hover>Scrivimi →</a>
             </RevealOnScroll>
           </div>
 
@@ -380,22 +370,14 @@ function Contact() {
 
 function ContactForm() {
   const [sent, setSent] = useState(false);
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const data = new FormData(e.target);
-
-    const res = await fetch("https://formspree.io/f/xqeobjzd", {
-      method: "POST",
-      body: data,
-      headers: { Accept: "application/json" },
-    });
-
-    if (res.ok) setSent(true);
-  }
-
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        setSent(true);
+      }}
+      className="space-y-8"
+    >
       {[
         { id: "name", label: "Nome", type: "text" },
         { id: "email", label: "Email", type: "email" },
@@ -404,7 +386,6 @@ function ContactForm() {
           <span className="font-mono-cap text-muted-foreground">{f.label}</span>
           <input
             id={f.id}
-            name={f.id}
             type={f.type}
             required
             className="mt-2 w-full bg-transparent border-b border-border focus:border-foreground outline-none py-3 text-lg"
@@ -414,12 +395,12 @@ function ContactForm() {
       <label className="block">
         <span className="font-mono-cap text-muted-foreground">Messaggio</span>
         <textarea
-          name="message"
           required
           rows={4}
           className="mt-2 w-full bg-transparent border-b border-border focus:border-foreground outline-none py-3 text-lg resize-none"
         />
       </label>
+
       <button
         type="submit"
         className="group relative overflow-hidden border border-foreground px-10 py-5 font-mono-cap inline-block"
@@ -438,8 +419,8 @@ function Footer() {
   return (
     <>
       <footer className="border-t border-border px-5 md:px-10 py-10 flex flex-col md:flex-row gap-4 md:justify-between font-mono-cap text-muted-foreground">
-        <span>© 2026 Daniel Diemoz</span>
-        <span>Tutti i diritti riservati</span>
+        <span>© 2026 Diemoz Studio</span>
+        <span>Costruito a mano in Milano</span>
         <a href="#top" data-cursor-hover>Torna su ↑</a>
       </footer>
     </>
