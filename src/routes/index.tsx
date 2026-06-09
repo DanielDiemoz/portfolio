@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { useState } from "react";
 import { Nav } from "@/components/Nav";
 import { RevealText, RevealOnScroll } from "@/components/Reveal";
+import { Analytics } from "@vercel/analytics/next"
 import work01 from "@/assets/work-01.jpg";
 import work02 from "@/assets/work-02.jpg";
 import work03 from "@/assets/work-03.jpg";
