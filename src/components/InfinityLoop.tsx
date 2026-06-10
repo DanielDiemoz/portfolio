@@ -1,20 +1,22 @@
-
 import { useEffect, useRef } from 'react';
 
-const THEMES = {
-   neon: ['#b57bee','#5ec9f5','#f55e9e','#7bf5c5','#f5c45e','#ee7bbb','#7bcdf5','#f57b7b'],
+type ThemeName = 'neon' | 'ember' | 'ocean' | 'candy' | 'soft';
+type Point = { x: number; y: number };
+
+const THEMES: Record<ThemeName, string[]> = {
+  neon: ['#b57bee','#5ec9f5','#f55e9e','#7bf5c5','#f5c45e','#ee7bbb','#7bcdf5','#f57b7b'],
   ember: ['#f5844a','#f5c45e','#ee5e7b','#f5a33c','#e85588','#f5d080','#f0704a','#f59560'],
   ocean: ['#3ecccc','#4a9ef5','#5efaf0','#5e9af5','#1ad4a0','#2ae0d0','#60aff5','#40d4b0'],
   candy: ['#f55eb0','#c97bee','#ee5e5e','#f597ee','#ee7b9e','#d45ef5','#f57bb5','#ee9ef5'],
-   soft: ['#c0c0c0','#e8e8e8','#a0a0a0','#f0f0f0','#b0b0b0','#d8d8d8','#888888','#e0e0e0'],
+  soft: ['#c0c0c0','#e8e8e8','#a0a0a0','#f0f0f0','#b0b0b0','#d8d8d8','#888888','#e0e0e0'],
 };
 
-const CONFIG = {
-  theme:    'soft',   // 'neon' | 'ember' | 'ocean' | 'candy'
-  arms:     4,        // 2 – 8
-  ratio:    5,        // 2 – 11
-  speed:    0.007,    // es. 4 → 0.012, 6 → 0.018
-  maxTrail: 169,      // 100 – 1200
+const CONFIG: { theme: ThemeName; arms: number; ratio: number; speed: number; maxTrail: number } = {
+  theme: 'soft',
+  arms: 4,
+  ratio: 5,
+  speed: 0.007,
+  maxTrail: 169,
 };
 
 function hexToRgb(hex: string) {
@@ -25,17 +27,16 @@ export default function InfinityLoop({ className = "", style = {} }: { className
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
+    const canvas = canvasRef.current!;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d')!;
     if (!ctx) return;
     let t = 0;
-    let trailPts = [];
-    let animId;
+    let trailPts: Point[][] = [];
+    let animId: number | undefined;
 
     function setup() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2); // cap a 2
-      const isMobile = window.innerWidth < 768;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const w = canvas.parentElement ? canvas.parentElement.clientWidth : 300;
       const h = Math.round(w * 0.9);
       canvas.width  = w * dpr;
@@ -50,7 +51,8 @@ export default function InfinityLoop({ className = "", style = {} }: { className
     function draw() {
       const isMobile = window.innerWidth < 768;
       const { arms, ratio, maxTrail, theme } = CONFIG;
-      const speed = isMobile ? CONFIG.speed * 2.5 : CONFIG.speed;      const dpr = window.devicePixelRatio || 1;
+      const speed = isMobile ? CONFIG.speed * 2.5 : CONFIG.speed;
+      const dpr = window.devicePixelRatio || 1;
       const W = canvas.width  / dpr;
       const H = canvas.height / dpr;
       const cx = W / 2, cy = H / 2;
@@ -58,7 +60,7 @@ export default function InfinityLoop({ className = "", style = {} }: { className
 
       t += speed;
 
-      const pts = [];
+      const pts: Point[] = [];
       for (let a = 0; a < arms; a++) {
         const phase = (a / arms) * Math.PI * 2;
         const x = cx + R * 0.54 * Math.cos(t + phase) + R * 0.32 * Math.cos(ratio * t + phase);
@@ -91,8 +93,8 @@ export default function InfinityLoop({ className = "", style = {} }: { className
       }
 
       const last = trailPts[trailPts.length - 1];
-      if (last) {
-        last.forEach((p, a) => {
+      if (!last) return;
+      last.forEach((p: Point, a: number) => {
           const [r,g,b] = hexToRgb(colors[a % colors.length]);
           ctx.beginPath();
           ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
@@ -102,7 +104,6 @@ export default function InfinityLoop({ className = "", style = {} }: { className
           ctx.fill();
           ctx.shadowBlur = 0;
         });
-      }
 
       animId = requestAnimationFrame(draw);
     }
@@ -113,7 +114,7 @@ export default function InfinityLoop({ className = "", style = {} }: { className
 
     // pulizia quando il componente viene smontato
     return () => {
-      cancelAnimationFrame(animId);
+      if (animId !== undefined) cancelAnimationFrame(animId);
       window.removeEventListener('resize', setup);
     };
   }, []);
