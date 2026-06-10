@@ -36,14 +36,14 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "ProfessionalService",
           name: "Daniel Diemoz — Sviluppo Web Freelance",
-          url: "https://danieldiemoz.it",
+          url: "https://danieldiemoz.com",
           description:
             "Sviluppatore web freelance in Italia. Realizzo siti vetrina e aziendali professionali per piccole e medie imprese.",
           founder: {
             "@type": "Person",
             name: "Daniel Diemoz",
             jobTitle: "Sviluppatore Web Freelance",
-            url: "https://danieldiemoz.it",
+            url: "https://danieldiemoz.com",
           },
           address: {
             "@type": "PostalAddress",

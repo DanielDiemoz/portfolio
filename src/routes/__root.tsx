@@ -89,21 +89,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "Daniel Diemoz | Sviluppatore Web Freelance — Siti Professionali per Aziende" },
       { property: "og:description", content: "Siti vetrina e aziendali professionali per il mercato italiano. Sviluppo web su misura, design moderno e performance reali." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://danieldiemoz.it" },
+      { property: "og:url", content: "https://danieldiemoz.com" },
       { property: "og:locale", content: "it_IT" },
-      { property: "og:image", content: "https://danieldiemoz.it/og-image.jpg" },
+      { property: "og:image", content: "https://danieldiemoz.com/og-image.jpg" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
 
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Daniel Diemoz | Sviluppatore Web Freelance" },
       { name: "twitter:description", content: "Siti vetrina e aziendali professionali per il mercato italiano. Sviluppo web su misura." },
-      { name: "twitter:image", content: "https://danieldiemoz.it/og-image.jpg" },
+      { name: "twitter:image", content: "https://danieldiemoz.com/og-image.jpg" },
     ],
     links: [
       {
         rel: "canonical",
-        href: "https://danieldiemoz.it",
+        href: "https://danieldiemoz.com",
       },
       {
         rel: "preconnect",

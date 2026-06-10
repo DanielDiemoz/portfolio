@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://danieldiemoz.it/sitemap.xml
+Sitemap: https://danieldiemoz.com/sitemap.xml
