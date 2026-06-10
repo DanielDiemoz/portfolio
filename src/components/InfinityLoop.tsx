@@ -34,7 +34,8 @@ export default function InfinityLoop({ className = "", style = {} }: { className
     let animId;
 
     function setup() {
-      const dpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2); // cap a 2
+      const isMobile = window.innerWidth < 768;
       const w = canvas.parentElement ? canvas.parentElement.clientWidth : 300;
       const h = Math.round(w * 0.9);
       canvas.width  = w * dpr;
@@ -45,11 +46,11 @@ export default function InfinityLoop({ className = "", style = {} }: { className
       trailPts = [];
       ctx.clearRect(0, 0, w, h);
     }
-
     
     function draw() {
-      const { arms, ratio, speed, maxTrail, theme } = CONFIG;
-      const dpr = window.devicePixelRatio || 1;
+      const isMobile = window.innerWidth < 768;
+      const { arms, ratio, maxTrail, theme } = CONFIG;
+      const speed = isMobile ? CONFIG.speed * 2.5 : CONFIG.speed;      const dpr = window.devicePixelRatio || 1;
       const W = canvas.width  / dpr;
       const H = canvas.height / dpr;
       const cx = W / 2, cy = H / 2;

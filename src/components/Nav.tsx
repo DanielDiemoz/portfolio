@@ -33,7 +33,7 @@ export function Nav() {
       <div className="flex items-center justify-between px-5 md:px-10 py-5 relative">
       <motion.a
   href="#top"
-  className="font-display text-3xl tracking-wide leading-none font-normal bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.18)]"
+  className="font-display text-2xl tracking-wide leading-none font-normal bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.18)]"
   style={{
     backgroundImage: "linear-gradient(90deg, #fff 0%, #fff 30%, #aaa 50%, #fff 70%, #fff 100%)",
     backgroundSize: "200% 100%",

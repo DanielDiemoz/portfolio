@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Nav } from "@/components/Nav";
 import { RevealText, RevealOnScroll } from "@/components/Reveal";
 import { Analytics } from "@vercel/analytics/next"
@@ -322,7 +322,7 @@ function Contact() {
         <h2 className="font-display text-[16vw] md:text-[12vw] leading-[0.85]">
           Lavoriamo
           <br />
-          <span className="italic">insieme.</span>
+          <span className="font-display text-[16vw] md:text-[12vw] leading-[0.85]">insieme.</span>
         </h2>
       </RevealOnScroll>
 
@@ -331,33 +331,33 @@ function Contact() {
           <RevealOnScroll>
             <div className="font-mono-cap text-muted-foreground mb-3">Email diretta</div>
             <a
-              href="mailto:ciao@Diemoz.studio"
+              href="mailto:anonimodiemoz@gmail.com"
               className="font-display text-4xl md:text-6xl break-all border-b border-border pb-3 inline-block hover:border-foreground transition-colors"
               data-cursor-hover
             >
-              danieldiemoz@zome.it
+              info@danieldiemoz.it
             </a>
           </RevealOnScroll>
 
           <div className="grid grid-cols-2 gap-8">
             <RevealOnScroll>
               <div className="font-mono-cap text-muted-foreground mb-2">Telefono</div>
-              <a href="tel:+393382313527" className="text-xl" data-cursor-hover>+39 333 12 34 567</a>
+              <a href="tel:+393382313527" className="text-xl" data-cursor-hover>+39 338 23 13 527</a>
             </RevealOnScroll>
             <RevealOnScroll delay={0.1}>
               <div className="font-mono-cap text-muted-foreground mb-2">WhatsApp</div>
-              <a href="https://wa.me/393331234567" className="text-xl" data-cursor-hover>Scrivimi →</a>
+              <a href="https://wa.me/393382313527" className="text-xl" data-cursor-hover>Scrivimi →</a>
             </RevealOnScroll>
           </div>
 
-          <RevealOnScroll>
+          {/* <RevealOnScroll>
             <div className="font-mono-cap text-muted-foreground mb-4">Altrove</div>
             <div className="flex gap-6 font-mono-cap">
               {["LinkedIn", "Behance", "Instagram"].map((s) => (
                 <a key={s} href="#" className="border-b border-border hover:border-foreground pb-1" data-cursor-hover>{s}</a>
               ))}
             </div>
-          </RevealOnScroll>
+          </RevealOnScroll> */}
         </div>
 
         <RevealOnScroll className="md:col-span-6 md:col-start-7" delay={0.2}>
@@ -370,14 +370,29 @@ function Contact() {
 
 function ContactForm() {
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setLoading(true);
+    const data = new FormData(e.target as HTMLFormElement);
+    const res = await fetch("https://formspree.io/f/xqeobjzd", {
+      method: "POST",
+      body: data,
+      headers: { Accept: "application/json" },
+    });
+
+    if (res.ok) {
+      setSent(true);
+      formRef.current?.reset();
+      setTimeout(() => setSent(false), 4000);
+    }
+    setLoading(false);
+  }
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        setSent(true);
-      }}
-      className="space-y-8"
-    >
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-8">
       {[
         { id: "name", label: "Nome", type: "text" },
         { id: "email", label: "Email", type: "email" },
@@ -386,35 +401,44 @@ function ContactForm() {
           <span className="font-mono-cap text-muted-foreground">{f.label}</span>
           <input
             id={f.id}
+            name={f.id}
             type={f.type}
             required
-            className="mt-2 w-full bg-transparent border-b border-border focus:border-foreground outline-none py-3 text-lg"
+            className="mt-2 w-full bg-transparent border-b border-border focus:border-foreground outline-none py-3 text-lg transition-colors duration-300"
           />
         </label>
       ))}
       <label className="block">
         <span className="font-mono-cap text-muted-foreground">Messaggio</span>
         <textarea
+          name="message"
           required
           rows={4}
-          className="mt-2 w-full bg-transparent border-b border-border focus:border-foreground outline-none py-3 text-lg resize-none"
+          onKeyDown={(e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+            if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+              (e.currentTarget.closest("form") as HTMLFormElement)?.requestSubmit();
+            }
+          }}
+          className="mt-2 w-full bg-transparent border-b border-border focus:border-foreground outline-none py-3 text-lg resize-none transition-colors duration-300"
         />
+        <span className="text-xs text-muted-foreground mt-1 block">
+          ctrl + invio per inviare
+        </span>
       </label>
-
       <button
         type="submit"
-        className="group relative overflow-hidden border border-foreground px-10 py-5 font-mono-cap inline-block"
+        disabled={loading}
+        className="group relative overflow-hidden border border-foreground px-10 py-5 font-mono-cap inline-block disabled:opacity-50 disabled:cursor-not-allowed"
         data-cursor-hover
       >
         <span className="absolute inset-0 bg-foreground translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]" />
         <span className="relative group-hover:text-background transition-colors duration-500">
-          {sent ? "Inviato — grazie." : "Invia messaggio →"}
+          {loading ? "Invio..." : sent ? "✓ Inviato" : "Invia messaggio →"}
         </span>
       </button>
     </form>
   );
 }
-
 function Footer() {
   return (
     <>
