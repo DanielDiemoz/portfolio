@@ -38,15 +38,50 @@ const PROJECTS = [
 ];
 
 const SERVICES = [
-  { n: "01", title: "UI Design", desc: "Interfacce digitali che bilanciano forma, funzione e personalità." },
-  { n: "02", title: "UX Research", desc: "Ricerca qualitativa, test di usabilità, mappature di flusso." },
-  { n: "03", title: "Prototipazione", desc: "Prototipi ad alta fedeltà per validare prima di costruire." },
-  { n: "04", title: "Branding", desc: "Sistemi visivi coerenti dal logo al touchpoint digitale." },
-  { n: "05", title: "Web Design", desc: "Siti editoriali, portfolio, landing page che convertono." },
+
+  {
+    n: "01",
+    title: "UI Design",
+    desc: "Interfacce chiare, coerenti e curate nei dettagli, progettate per migliorare l’esperienza utente e rafforzare la percezione del brand."
+  },
+
+  {
+    n: "02",
+    title: "UX Research",
+    desc: "Analisi, interviste e test di usabilità per prendere decisioni basate su dati reali e ridurre il rischio di errori progettuali."
+  },
+
+  {
+    n: "03",
+    title: "Prototipazione",
+    desc: "Prototipi ad alta fedeltà che permettono di validare idee, raccogliere feedback e ottimizzare il prodotto prima dello sviluppo."
+  },
+
+  {
+    n: "04",
+    title: "Branding",
+    desc: "Identità visive solide e riconoscibili, costruite per comunicare credibilità, coerenza e valore in ogni punto di contatto."
+  },
+
+  {
+    n: "05",
+    title: "Web Design",
+    desc: "Siti web veloci, accessibili e orientati agli obiettivi, progettati per trasformare visitatori in contatti e clienti."
+  },
+
 ];
-
-const SKILLS = ["Figma", "Webflow", "Framer", "After Effects", "Design Systems", "Motion", "Strategia", "Typography", "Art Direction", "Brand Identity"];
-
+const SKILLS = [
+  "UI/UX Design",
+  "Design Systems",
+  "User Research",
+  "Brand Identity",
+  "Art Direction",
+  "Conversion-Focused Design",
+  "Prototyping",
+  "Motion Design",
+  "Webflow",
+  "Framer"
+];
 function Index() {
   return (
     <div id="top" className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -207,7 +242,7 @@ function Portfolio() {
       <div className="flex justify-between items-end mb-16">
         <RevealOnScroll>
           <div className="font-mono-cap text-muted-foreground mb-4">(02) — Lavori selezionati</div>
-          <h2 className="font-display text-[14vw] md:text-[8vw] leading-[0.85]">Archivio.</h2>
+          <h2 className="font-display text-[14vw] md:text-[8vw] leading-[0.85]">Archivio</h2>
         </RevealOnScroll>
       </div>
 
@@ -271,7 +306,7 @@ function Services() {
       <div className="px-5 md:px-10 pt-32 pb-8">
         <RevealOnScroll>
           <div className="font-mono-cap text-muted-foreground mb-4">(03) — Servizi</div>
-          <h2 className="font-display text-[14vw] md:text-[8vw] leading-[0.85]">Cosa faccio.</h2>
+          <h2 className="font-display text-[14vw] md:text-[8vw] leading-[0.85]">Cosa faccio</h2>
         </RevealOnScroll>
       </div>
 
@@ -322,7 +357,7 @@ function Contact() {
         <h2 className="font-display text-[16vw] md:text-[12vw] leading-[0.85]">
           Lavoriamo
           <br />
-          <span className="font-display text-[16vw] md:text-[12vw] leading-[0.85]">insieme.</span>
+          <span className="font-display text-[16vw] md:text-[12vw] leading-[0.85]">insieme</span>
         </h2>
       </RevealOnScroll>
 
