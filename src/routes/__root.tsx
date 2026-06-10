@@ -77,16 +77,34 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Daniel Diemoz UI/UX Designer" },
-      { name: "description", content: "UI/UX Designer" },
+      { title: "Daniel Diemoz | Sviluppatore Web Freelance — Siti Professionali per Aziende" },
+      {
+        name: "description",
+        content:
+          "Daniel Diemoz, sviluppatore web freelance in Italia. Realizzo siti vetrina e aziendali professionali, veloci e ottimizzati per convertire visitatori in clienti. Contattami per un preventivo.",
+      },
       { name: "author", content: "Daniel Diemoz" },
-      { property: "og:title", content: "Daniel Diemoz Portfolio" },
-      { property: "og:description", content: "UI/UX Designer" },
+      { name: "robots", content: "index, follow" },
+
+      { property: "og:title", content: "Daniel Diemoz | Sviluppatore Web Freelance — Siti Professionali per Aziende" },
+      { property: "og:description", content: "Siti vetrina e aziendali professionali per il mercato italiano. Sviluppo web su misura, design moderno e performance reali." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@DanielDiemoz" },
+      { property: "og:url", content: "https://danieldiemoz.it" },
+      { property: "og:locale", content: "it_IT" },
+      { property: "og:image", content: "https://danieldiemoz.it/og-image.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Daniel Diemoz | Sviluppatore Web Freelance" },
+      { name: "twitter:description", content: "Siti vetrina e aziendali professionali per il mercato italiano. Sviluppo web su misura." },
+      { name: "twitter:image", content: "https://danieldiemoz.it/og-image.jpg" },
     ],
     links: [
+      {
+        rel: "canonical",
+        href: "https://danieldiemoz.it",
+      },
       {
         rel: "preconnect",
         href: "https://fonts.googleapis.com",
@@ -114,7 +132,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="it">
       <head>
         <HeadContent />
       </head>

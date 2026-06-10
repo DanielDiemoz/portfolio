@@ -18,10 +18,77 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Portfolio brutalist di un designer UI/UX indipendente. Esperienze digitali che colpiscono duro.",
+          "Daniel Diemoz, sviluppatore web freelance in Italia. Realizzo siti vetrina e aziendali professionali, veloci e ottimizzati per convertire visitatori in clienti. Contattami per un preventivo gratuito.",
       },
-      { property: "og:title", content: "Zome — UI/UX Designer" },
-      { property: "og:description", content: "Esperienze digitali che colpiscono duro." },
+      {
+        property: "og:title",
+        content: "Daniel Diemoz | Sviluppatore Web Freelance — Siti Professionali per Aziende",
+      },
+      {
+        property: "og:description",
+        content: "Siti vetrina e aziendali professionali per il mercato italiano. Sviluppo web su misura.",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ProfessionalService",
+          name: "Daniel Diemoz — Sviluppo Web Freelance",
+          url: "https://danieldiemoz.it",
+          description:
+            "Sviluppatore web freelance in Italia. Realizzo siti vetrina e aziendali professionali per piccole e medie imprese.",
+          founder: {
+            "@type": "Person",
+            name: "Daniel Diemoz",
+            jobTitle: "Sviluppatore Web Freelance",
+            url: "https://danieldiemoz.it",
+          },
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Aosta",
+            addressCountry: "IT",
+          },
+          contactPoint: {
+            "@type": "ContactPoint",
+            telephone: "+39-338-2313527",
+            email: "info@danieldiemoz.it",
+            contactType: "customer service",
+            availableLanguage: ["Italian"],
+          },
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Servizi di Sviluppo Web",
+            itemListElement: [
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Realizzazione Siti Vetrina",
+                  description: "Siti web professionali per aziende e professionisti",
+                },
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Siti Web Aziendali",
+                  description: "Sviluppo siti web completi per piccole e medie imprese",
+                },
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "UI/UX Design",
+                  description: "Design di interfacce moderne e funzionali",
+                },
+              },
+            ],
+          },
+        }),
+      },
     ],
   }),
   component: Index,
@@ -29,58 +96,58 @@ export const Route = createFileRoute("/")({
 
 
 const PROJECTS = [
-  { n: "01", title: "Atlante", cat: "Brand · Web", img: work01, span: "md:col-span-7 md:row-span-2", desc: "Identità e sito per uno studio di architettura milanese.", ratio: "aspect-[4/5]" },
-  { n: "02", title: "Nodo", cat: "Mobile · UX", img: work02, span: "md:col-span-5", desc: "App di mindfulness con interfaccia tattile e minimale.", ratio: "aspect-[4/3]" },
-  { n: "03", title: "Forma", cat: "Editorial", img: work03, span: "md:col-span-5", desc: "Rivista digitale indipendente di cultura visiva.", ratio: "aspect-[4/3]" },
-  { n: "04", title: "Vetro", cat: "Web · Motion", img: work04, span: "md:col-span-6", desc: "E-commerce per un brand di occhiali artigianali.", ratio: "aspect-[4/5]" },
-  { n: "05", title: "Sale", cat: "Identità", img: work05, span: "md:col-span-6", desc: "Sistema d'identità per un ristorante di alta cucina.", ratio: "aspect-[4/3]" },
-  { n: "06", title: "Orbita", cat: "Dashboard · SaaS", img: work06, span: "md:col-span-12", desc: "Piattaforma analytics per agenzie creative.", ratio: "aspect-[16/9]" },
+  { n: "01", title: "Atlante", cat: "Brand · Web", img: work01, span: "md:col-span-7 md:row-span-2", desc: "Identità e sito per uno studio di architettura milanese.", alt: "Sito web aziendale per studio di architettura Milano — realizzato da Daniel Diemoz", ratio: "aspect-[4/5]" },
+  { n: "02", title: "Nodo", cat: "Mobile · UX", img: work02, span: "md:col-span-5", desc: "App di mindfulness con interfaccia tattile e minimale.", alt: "App mobile mindfulness con design UI/UX minimalista — Daniel Diemoz", ratio: "aspect-[4/3]" },
+  { n: "03", title: "Forma", cat: "Editorial", img: work03, span: "md:col-span-5", desc: "Rivista digitale indipendente di cultura visiva.", alt: "Rivista digitale indipendente di cultura visiva — design editoriale Daniel Diemoz", ratio: "aspect-[4/3]" },
+  { n: "04", title: "Vetro", cat: "Web · Motion", img: work04, span: "md:col-span-6", desc: "E-commerce per un brand di occhiali artigianali.", alt: "E-commerce artigianale per brand occhiali — design web Daniel Diemoz", ratio: "aspect-[4/5]" },
+  { n: "05", title: "Sale", cat: "Identità", img: work05, span: "md:col-span-6", desc: "Sistema d'identità per un ristorante di alta cucina.", alt: "Brand identity per ristorante di alta cucina — Daniel Diemoz", ratio: "aspect-[4/3]" },
+  { n: "06", title: "Orbita", cat: "Dashboard · SaaS", img: work06, span: "md:col-span-12", desc: "Piattaforma analytics per agenzie creative.", alt: "Dashboard analytics SaaS per agenzie creative — Daniel Diemoz", ratio: "aspect-[16/9]" },
 ];
 
 const SERVICES = [
 
   {
     n: "01",
-    title: "UI Design",
-    desc: "Interfacce chiare, coerenti e curate nei dettagli, progettate per migliorare l’esperienza utente e rafforzare la percezione del brand."
+    title: "Siti Vetrina",
+    desc: "Il primo passo per portare online la tua attività. Realizzo siti vetrina professionali, ottimizzati per i motori di ricerca e progettati per presentare al meglio i tuoi servizi e convertire i visitatori in clienti."
   },
 
   {
     n: "02",
-    title: "UX Research",
-    desc: "Analisi, interviste e test di usabilità per prendere decisioni basate su dati reali e ridurre il rischio di errori progettuali."
+    title: "Siti Aziendali",
+    desc: "Soluzioni web complete per piccole e medie imprese. Siti aziendali su misura, veloci, sicuri e facili da gestire, pensati per crescere insieme alla tua azienda e rafforzare la tua presenza online."
   },
 
   {
     n: "03",
-    title: "Prototipazione",
-    desc: "Prototipi ad alta fedeltà che permettono di validare idee, raccogliere feedback e ottimizzare il prodotto prima dello sviluppo."
+    title: "UI/UX Design",
+    desc: "Interfacce moderne e intuitive che guidano i tuoi clienti verso l'azione desiderata: un acquisto, una richiesta di preventivo, una prenotazione. Design che unisce estetica e funzionalità per risultati misurabili."
   },
 
   {
     n: "04",
-    title: "Branding",
-    desc: "Identità visive solide e riconoscibili, costruite per comunicare credibilità, coerenza e valore in ogni punto di contatto."
+    title: "Ottimizzazione SEO",
+    desc: "Ogni sito che realizzo è progettato per essere trovato su Google. Struttura tecnica ottimizzata, contenuti pensati per il posizionamento e best practice aggiornate per aumentare la visibilità della tua azienda."
   },
 
   {
     n: "05",
-    title: "Web Design",
-    desc: "Siti web veloci, accessibili e orientati agli obiettivi, progettati per trasformare visitatori in contatti e clienti."
+    title: "Consulenza & Supporto",
+    desc: "Non ti lascio solo dopo il lancio. Offro assistenza continua, aggiornamenti e consulenza per far evolvere il tuo sito insieme alle esigenze della tua azienda. Un partner tecnico sempre al tuo fianco."
   },
 
 ];
 const SKILLS = [
+  "Sviluppo Web",
+  "React",
+  "TypeScript",
+  "Siti Vetrina",
+  "Siti Aziendali",
+  "SEO",
   "UI/UX Design",
-  "Design Systems",
-  "User Research",
-  "Brand Identity",
-  "Art Direction",
-  "Conversion-Focused Design",
-  "Prototyping",
-  "Motion Design",
-  "Webflow",
-  "Framer"
+  "Performance",
+  "Tailwind CSS",
+  "Supporto Continuo"
 ];
 function Index() {
   return (
@@ -171,7 +238,7 @@ function Hero() {
             transition={{ delay: 1.4, duration: 0.8 }}
             className="max-w-md text-base md:text-lg text-muted-foreground"
           >
-          Siti web moderni e professionali, sviluppati con cura per offrire risultati concreti.          </motion.p>
+          Sviluppatore web freelance in Italia. Realizzo siti vetrina e aziendali professionali, progettati per far crescere la tua attività e trasformare i visitatori in clienti.          </motion.p>
 
           <motion.a
             href="#work"
@@ -203,18 +270,19 @@ function About() {
       <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
         <RevealOnScroll className="md:col-span-8" delay={0.1}>
           <h2 className="font-display [linear-gradient(135deg,_#555_0%,_#ccc_40%,_#ccc_60%,_#444_100%)] text-[10vw] md:text-[7vw] leading-[0.9]">
-            Oltre l'estetica, verso i risultati.
+            Sviluppo siti web professionali per aziende italiane
           </h2>
         </RevealOnScroll>
 
         <RevealOnScroll className="md:col-span-4 md:col-start-9 md:pt-20 space-y-5" delay={0.25}>
           <p className="text-foreground/70 text-base leading-relaxed">
-            Creo interfacce, sistemi di brand e prodotti digitali progettati per essere chiari, efficaci e orientati alla performance. Il focus non è solo come qualcosa appare, ma come funziona e cosa produce.
+            Sono Daniel Diemoz, sviluppatore web freelance con base ad Aosta. Aiuto piccole e medie imprese italiane a costruire la loro presenza online con siti web professionali, veloci e progettati per ottenere risultati concreti: più contatti, più clienti, più visibilità.
           </p>
           <p className="text-foreground/70 text-base leading-relaxed">
-            Il mio lavoro unisce struttura e sensibilità visiva, con attenzione a ogni dettaglio che incide sull’esperienza e sulla conversione.  </p>
+            Ogni sito che realizzo unisce design moderno, usabilità e performance tecniche. Mi occupo personalmente di ogni fase: dall'analisi delle esigenze alla pubblicazione online, con supporto continuo dopo il lancio.
+          </p>
           <p className="text-foreground text-sm font-mono-cap tracking-widest pt-2 border-t border-foreground/10">
-            Disponibile per nuovi progetti Q2 2026.
+            Disponibile per nuovi progetti. Contattami per un preventivo gratuito.
           </p>
       </RevealOnScroll>
       </div>
@@ -242,7 +310,7 @@ function Portfolio() {
       <div className="flex justify-between items-end mb-16">
         <RevealOnScroll>
           <div className="font-mono-cap text-muted-foreground mb-4">(02) — Lavori selezionati</div>
-          <h2 className="font-display text-[14vw] md:text-[8vw] leading-[0.85]">Archivio</h2>
+          <h2 className="font-display text-[14vw] md:text-[8vw] leading-[0.85]">Progetti web realizzati</h2>
         </RevealOnScroll>
       </div>
 
@@ -265,7 +333,7 @@ function ProjectCard({ project, index }: { project: (typeof PROJECTS)[number]; i
       <div className={`relative overflow-hidden ${project.ratio} bg-muted ${!isEven ? "md:order-2" : ""}`}>
         <motion.img
           src={project.img}
-          alt={project.title}
+          alt={project.alt}
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover grayscale"
           whileHover={{ scale: 1.04 }}
@@ -297,7 +365,7 @@ function Services() {
         <div className="flex animate-marquee whitespace-nowrap">
           {[...SKILLS, ...SKILLS, ...SKILLS].map((s, i) => (
             <span key={i} className="font-display text-5xl md:text-7xl px-8 flex items-center gap-8 leading-none">
-              {s} <span className="text-muted-foreground">✱</span>
+              {s} <span className="text-muted-foreground">•</span>
             </span>
           ))}
         </div>
@@ -306,7 +374,7 @@ function Services() {
       <div className="px-5 md:px-10 pt-32 pb-8">
         <RevealOnScroll>
           <div className="font-mono-cap text-muted-foreground mb-4">(03) — Servizi</div>
-          <h2 className="font-display text-[14vw] md:text-[8vw] leading-[0.85]">Cosa faccio</h2>
+          <h2 className="font-display text-[14vw] md:text-[8vw] leading-[0.85]">Servizi di sviluppo e design web</h2>
         </RevealOnScroll>
       </div>
 
@@ -355,9 +423,9 @@ function Contact() {
 
       <RevealOnScroll delay={0.1}>
         <h2 className="font-display text-[16vw] md:text-[12vw] leading-[0.85]">
-          Lavoriamo
+          Richiedi un preventivo
           <br />
-          <span className="font-display text-[16vw] md:text-[12vw] leading-[0.85]">insieme</span>
+          <span className="font-display text-[16vw] md:text-[12vw] leading-[0.85]">gratuito</span>
         </h2>
       </RevealOnScroll>
 
@@ -366,7 +434,7 @@ function Contact() {
           <RevealOnScroll>
             <div className="font-mono-cap text-muted-foreground mb-3">Email diretta</div>
             <a
-              href="mailto:anonimodiemoz@gmail.com"
+              href="mailto:info@danieldiemoz.it"
               className="font-display text-4xl md:text-6xl break-all border-b border-border pb-3 inline-block hover:border-foreground transition-colors"
               data-cursor-hover
             >
@@ -396,6 +464,9 @@ function Contact() {
         </div>
 
         <RevealOnScroll className="md:col-span-6 md:col-start-7" delay={0.2}>
+          <p className="text-muted-foreground mb-6 leading-relaxed">
+            Raccontami il tuo progetto. Ti rispondo entro 24 ore con un preventivo personalizzato e senza impegno.
+          </p>
           <ContactForm />
         </RevealOnScroll>
       </div>
