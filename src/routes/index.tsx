@@ -12,8 +12,6 @@ import work05 from "@/assets/work-01.jpg";
 import work06 from "@/assets/work-01.jpg";
 import InfinityLoop from "@/components/InfinityLoop";
 
-<meta name="google-site-verification" content="eom9ui-w72fdikotQmTa3XWW6TjhXQlbkRMMTkEMaTs" />
-
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
