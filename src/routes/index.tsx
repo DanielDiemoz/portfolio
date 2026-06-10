@@ -5,11 +5,11 @@ import { Nav } from "@/components/Nav";
 import { RevealText, RevealOnScroll } from "@/components/Reveal";
 import { Analytics } from "@vercel/analytics/next"
 import work01 from "@/assets/work-01.jpg";
-import work02 from "@/assets/work-02.jpg";
-import work03 from "@/assets/work-03.jpg";
-import work04 from "@/assets/work-04.jpg";
-import work05 from "@/assets/work-05.jpg";
-import work06 from "@/assets/work-06.jpg";
+import work02 from "@/assets/work-01.jpg";
+import work03 from "@/assets/work-01.jpg";
+import work04 from "@/assets/work-01.jpg";
+import work05 from "@/assets/work-01.jpg";
+import work06 from "@/assets/work-01.jpg";
 import InfinityLoop from "@/components/InfinityLoop";
 
 export const Route = createFileRoute("/")({
@@ -167,7 +167,7 @@ function About() {
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
         <RevealOnScroll className="md:col-span-8" delay={0.1}>
-          <h2 className="font-display text-[10vw] md:text-[7vw] leading-[0.9]">
+          <h2 className="font-display [linear-gradient(135deg,_#555_0%,_#ccc_40%,_#ccc_60%,_#444_100%)] text-[10vw] md:text-[7vw] leading-[0.9]">
             Oltre l'estetica, verso i risultati.
           </h2>
         </RevealOnScroll>
@@ -443,8 +443,8 @@ function Footer() {
   return (
     <>
       <footer className="border-t border-border px-5 md:px-10 py-10 flex flex-col md:flex-row gap-4 md:justify-between font-mono-cap text-muted-foreground">
-        <span>© 2026 Diemoz Studio</span>
-        <span>Costruito a mano in Milano</span>
+        <span>© 2026 Daniel Diemoz</span>
+        <span>Tutti i diritti riservati</span>
         <a href="#top" data-cursor-hover>Torna su ↑</a>
       </footer>
     </>
