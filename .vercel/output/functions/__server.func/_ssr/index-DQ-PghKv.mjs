@@ -30,7 +30,7 @@ function Nav() {
             motion.a,
             {
               href: "#top",
-              className: "font-display text-3xl tracking-wide leading-none font-normal bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.18)]",
+              className: "font-display text-2xl tracking-wide leading-none font-normal bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.18)]",
               style: {
                 backgroundImage: "linear-gradient(90deg, #fff 0%, #fff 30%, #aaa 50%, #fff 70%, #fff 100%)",
                 backgroundSize: "200% 100%"
@@ -154,7 +154,7 @@ function InfinityLoop({ className = "", style = {} }) {
     let trailPts = [];
     let animId;
     function setup() {
-      const dpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const w = canvas.parentElement ? canvas.parentElement.clientWidth : 300;
       const h = Math.round(w * 0.9);
       canvas.width = w * dpr;
@@ -166,7 +166,9 @@ function InfinityLoop({ className = "", style = {} }) {
       ctx.clearRect(0, 0, w, h);
     }
     function draw() {
-      const { arms, ratio, speed, maxTrail, theme } = CONFIG;
+      const isMobile = window.innerWidth < 768;
+      const { arms, ratio, maxTrail, theme } = CONFIG;
+      const speed = isMobile ? CONFIG.speed * 2.5 : CONFIG.speed;
       const dpr = window.devicePixelRatio || 1;
       const W = canvas.width / dpr;
       const H = canvas.height / dpr;
@@ -489,27 +491,23 @@ function Contact() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(RevealOnScroll, { delay: 0.1, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "font-display text-[16vw] md:text-[12vw] leading-[0.85]", children: [
       "Lavoriamo",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic", children: "insieme." })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display text-[16vw] md:text-[12vw] leading-[0.85]", children: "insieme." })
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 md:grid-cols-12 gap-12 mt-24", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "md:col-span-6 space-y-12", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs(RevealOnScroll, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono-cap text-muted-foreground mb-3", children: "Email diretta" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "mailto:ciao@Diemoz.studio", className: "font-display text-4xl md:text-6xl break-all border-b border-border pb-3 inline-block hover:border-foreground transition-colors", "data-cursor-hover": true, children: "danieldiemoz@zome.it" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "mailto:anonimodiemoz@gmail.com", className: "font-display text-4xl md:text-6xl break-all border-b border-border pb-3 inline-block hover:border-foreground transition-colors", "data-cursor-hover": true, children: "info@danieldiemoz.it" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-8", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs(RevealOnScroll, { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono-cap text-muted-foreground mb-2", children: "Telefono" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "tel:+393382313527", className: "text-xl", "data-cursor-hover": true, children: "+39 333 12 34 567" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "tel:+393382313527", className: "text-xl", "data-cursor-hover": true, children: "+39 338 23 13 527" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs(RevealOnScroll, { delay: 0.1, children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono-cap text-muted-foreground mb-2", children: "WhatsApp" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://wa.me/393331234567", className: "text-xl", "data-cursor-hover": true, children: "Scrivimi →" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://wa.me/393382313527", className: "text-xl", "data-cursor-hover": true, children: "Scrivimi →" })
           ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(RevealOnScroll, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono-cap text-muted-foreground mb-4", children: "Altrove" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-6 font-mono-cap", children: ["LinkedIn", "Behance", "Instagram"].map((s) => /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "border-b border-border hover:border-foreground pb-1", "data-cursor-hover": true, children: s }, s)) })
         ] })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(RevealOnScroll, { className: "md:col-span-6 md:col-start-7", delay: 0.2, children: /* @__PURE__ */ jsxRuntimeExports.jsx(ContactForm, {}) })
@@ -518,10 +516,27 @@ function Contact() {
 }
 function ContactForm() {
   const [sent, setSent] = reactExports.useState(false);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: (e) => {
+  const [loading, setLoading] = reactExports.useState(false);
+  const formRef = reactExports.useRef(null);
+  async function handleSubmit(e) {
     e.preventDefault();
-    setSent(true);
-  }, className: "space-y-8", children: [
+    setLoading(true);
+    const data = new FormData(e.target);
+    const res = await fetch("https://formspree.io/f/xqeobjzd", {
+      method: "POST",
+      body: data,
+      headers: {
+        Accept: "application/json"
+      }
+    });
+    if (res.ok) {
+      setSent(true);
+      formRef.current?.reset();
+      setTimeout(() => setSent(false), 4e3);
+    }
+    setLoading(false);
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { ref: formRef, onSubmit: handleSubmit, className: "space-y-8", children: [
     [{
       id: "name",
       label: "Nome",
@@ -532,15 +547,20 @@ function ContactForm() {
       type: "email"
     }].map((f) => /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-mono-cap text-muted-foreground", children: f.label }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: f.id, type: f.type, required: true, className: "mt-2 w-full bg-transparent border-b border-border focus:border-foreground outline-none py-3 text-lg" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: f.id, name: f.id, type: f.type, required: true, className: "mt-2 w-full bg-transparent border-b border-border focus:border-foreground outline-none py-3 text-lg transition-colors duration-300" })
     ] }, f.id)),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-mono-cap text-muted-foreground", children: "Messaggio" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("textarea", { required: true, rows: 4, className: "mt-2 w-full bg-transparent border-b border-border focus:border-foreground outline-none py-3 text-lg resize-none" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("textarea", { name: "message", required: true, rows: 4, onKeyDown: (e) => {
+        if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+          e.currentTarget.closest("form")?.requestSubmit();
+        }
+      }, className: "mt-2 w-full bg-transparent border-b border-border focus:border-foreground outline-none py-3 text-lg resize-none transition-colors duration-300" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-muted-foreground mt-1 block", children: "ctrl + invio per inviare" })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { type: "submit", className: "group relative overflow-hidden border border-foreground px-10 py-5 font-mono-cap inline-block", "data-cursor-hover": true, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { type: "submit", disabled: loading, className: "group relative overflow-hidden border border-foreground px-10 py-5 font-mono-cap inline-block disabled:opacity-50 disabled:cursor-not-allowed", "data-cursor-hover": true, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute inset-0 bg-foreground translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "relative group-hover:text-background transition-colors duration-500", children: sent ? "Inviato — grazie." : "Invia messaggio →" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "relative group-hover:text-background transition-colors duration-500", children: loading ? "Invio..." : sent ? "✓ Inviato" : "Invia messaggio →" })
     ] })
   ] });
 }
