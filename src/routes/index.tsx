@@ -3,14 +3,13 @@ import { motion } from "motion/react";
 import { useState, useRef } from "react";
 import { Nav } from "@/components/Nav";
 import { RevealText, RevealOnScroll } from "@/components/Reveal";
-import { Analytics } from "@vercel/analytics/next"
 import work01 from "@/assets/work-01.jpg";
 import work02 from "@/assets/work-01.jpg";
 import work03 from "@/assets/work-01.jpg";
 import work04 from "@/assets/work-01.jpg";
 import work05 from "@/assets/work-01.jpg";
 import work06 from "@/assets/work-01.jpg";
-import InfinityLoop from "@/components/InfinityLoop";
+import { SplineScene } from "@/components/ui/splite";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -201,31 +200,31 @@ function Hero() {
 
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <h1 className="font-display leading-[0.82] tracking-tight">
-        <div>
-          <RevealText
-            text="Daniel"
-            as="span"
-            className="text-[14vw] md:text-[8.3vw] font-normal bg-[linear-gradient(135deg,_#1a1a1a_0%,_#666_40%,_#555_60%,_#111_100%)] bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.18)]"
-            delay={0.3}
-          />
-        </div>
-        <div>
-          <RevealText
-            text="Diemoz"
-            as="span"
-            className="text-[14vw] md:text-[8.7vw] font-bold bg-[linear-gradient(135deg,_#555_0%,_#ccc_40%,_#ccc_60%,_#444_100%)] bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.18)]"
-            delay={0.5}
-          />
-        </div>
-      </h1>
-      <motion.div
+            <div>
+              <RevealText
+                text="Daniel"
+                as="span"
+                className="text-[14vw] md:text-[8.3vw] font-normal bg-[linear-gradient(135deg,_#1a1a1a_0%,_#666_40%,_#555_60%,_#111_100%)] bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.18)]"
+                delay={0.3}
+              />
+            </div>
+            <div>
+              <RevealText
+                text="Diemoz"
+                as="span"
+                className="text-[14vw] md:text-[8.7vw] font-bold bg-[linear-gradient(135deg,_#555_0%,_#ccc_40%,_#ccc_60%,_#444_100%)] bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.18)]"
+                delay={0.5}
+              />
+            </div>
+          </h1>
+          <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.8, duration: 1 }}
-            className="w-full md:w-[400px] lg:w-[560px] shrink-0 md:relative md:-left-[130px] md:top-[0px]"
+            className="w-full md:w-[520px] lg:w-[720px] shrink-0 md:relative md:-left-[150px] md:top-[0px]"
           >
-            <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-              <InfinityLoop style={{ width: "100%" }} />
+            <div className="w-full max-w-[1000px] aspect-[16/9]">
+              <SplineScene scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" className="w-full h-full" />
             </div>
 
           </motion.div>
@@ -238,7 +237,7 @@ function Hero() {
             transition={{ delay: 1.4, duration: 0.8 }}
             className="max-w-md text-base md:text-lg text-muted-foreground"
           >
-          Sviluppatore web freelance in Italia. Realizzo siti vetrina e aziendali professionali, progettati per far crescere la tua attività e trasformare i visitatori in clienti.          </motion.p>
+            Sviluppatore web freelance in Italia. Realizzo siti vetrina e aziendali professionali, progettati per far crescere la tua attività e trasformare i visitatori in clienti.          </motion.p>
 
           <motion.a
             href="#work"
@@ -284,22 +283,22 @@ function About() {
           <p className="text-foreground text-sm font-mono-cap tracking-widest pt-2 border-t border-foreground/10">
             Disponibile per nuovi progetti. Contattami per un preventivo gratuito.
           </p>
-      </RevealOnScroll>
+        </RevealOnScroll>
       </div>
 
       <div className="mt-24 md:mt-40 grid grid-cols-2 md:grid-cols-4 gap-y-12 border-t border-border pt-12">
-  {[
-    { n: "Consegna rapida", l: "Online prima di quanto pensi" },
-    { n: "Zero pensieri", l: "Pensiamo a tutto noi" },
-    { n: "Supporto incluso", l: "Sempre presenti dopo il lancio" },
-    { n: "Cresci online", l: "Visibile dove cercano i tuoi clienti" },
-  ].map((s, i) => (
-    <RevealOnScroll key={s.l} delay={i * 0.1} className="flex flex-col items-center text-center">
-      <div className="font-display text-2xl md:text-3xl leading-none">{s.n}</div>
-      <div className="font-mono-cap text-muted-foreground mt-3">{s.l}</div>
-    </RevealOnScroll>
-  ))}
-</div>
+        {[
+          { n: "Consegna rapida", l: "Online prima di quanto pensi" },
+          { n: "Zero pensieri", l: "Pensiamo a tutto noi" },
+          { n: "Supporto incluso", l: "Sempre presenti dopo il lancio" },
+          { n: "Cresci online", l: "Visibile dove cercano i tuoi clienti" },
+        ].map((s, i) => (
+          <RevealOnScroll key={s.l} delay={i * 0.1} className="flex flex-col items-center text-center">
+            <div className="font-display text-2xl md:text-3xl leading-none">{s.n}</div>
+            <div className="font-mono-cap text-muted-foreground mt-3">{s.l}</div>
+          </RevealOnScroll>
+        ))}
+      </div>
     </section>
   );
 }
@@ -479,7 +478,7 @@ function ContactForm() {
   const [loading, setLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
-async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
     const data = new FormData(e.target as HTMLFormElement);
