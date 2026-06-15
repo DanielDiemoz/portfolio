@@ -1,15 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { useState, useRef } from "react";
+import { useState, useRef, lazy, Suspense } from "react";
 import { Nav } from "@/components/Nav";
 import { RevealText, RevealOnScroll } from "@/components/Reveal";
-import work01 from "@/assets/work-01.jpg";
-import work02 from "@/assets/work-01.jpg";
-import work03 from "@/assets/work-01.jpg";
-import work04 from "@/assets/work-01.jpg";
-import work05 from "@/assets/work-01.jpg";
-import work06 from "@/assets/work-01.jpg";
-import { SplineScene } from "@/components/ui/splite";
+import work01 from "@/assets/work-01.webp";
+import work02 from "@/assets/work-02.webp";
+import work03 from "@/assets/work-03.webp";
+import work04 from "@/assets/work-04.webp";
+import work05 from "@/assets/work-05.webp";
+import work06 from "@/assets/work-06.webp";
+const SplineScene = lazy(() =>
+  import("@/components/ui/splite").then((m) => ({ default: m.SplineScene }))
+);
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -224,7 +226,9 @@ function Hero() {
             className="w-full md:w-[520px] lg:w-[720px] shrink-0 md:relative md:-left-[150px] md:top-[0px]"
           >
             <div className="w-full max-w-[1000px] aspect-[16/9]">
-              <SplineScene scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" className="w-full h-full" />
+              <Suspense fallback={<div className="w-full h-full bg-muted/20 animate-pulse rounded-lg" />}>
+                <SplineScene scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" className="w-full h-full" />
+              </Suspense>
             </div>
 
           </motion.div>
