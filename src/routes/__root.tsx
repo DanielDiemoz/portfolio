@@ -78,13 +78,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Daniel Diemoz | Sviluppatore Web Freelance — Siti Professionali per Aziende" },
-      {
-        name: "description",
+      { name: "description",
         content:
-          "Daniel Diemoz, sviluppatore web freelance in Italia. Realizzo siti vetrina e aziendali professionali, veloci e ottimizzati per convertire visitatori in clienti. Contattami per un preventivo.",
+          "Daniel Diemoz è uno sviluppatore web freelance ad Aosta. Realizzo siti vetrina e aziendali professionali, veloci, SEO-friendly e ottimizzati per convertire visitatori in clienti. Richiedi un preventivo gratuito.",
       },
       { name: "author", content: "Daniel Diemoz" },
       { name: "robots", content: "index, follow" },
+      { name: "keywords", content: "Daniel Diemoz, sviluppatore web, freelance, siti web, siti vetrina, siti aziendali, Aosta, Italia, sviluppo web, SEO, UI/UX design, web developer" },
+      { name: "googlebot", content: "index, follow" },
+      { name: "referrer", content: "strict-origin-when-cross-origin" },
 
       { property: "og:title", content: "Daniel Diemoz | Sviluppatore Web Freelance — Siti Professionali per Aziende" },
       { property: "og:description", content: "Siti vetrina e aziendali professionali per il mercato italiano. Sviluppo web su misura, design moderno e performance reali." },
@@ -94,11 +96,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image", content: "https://danieldiemoz.com/og-image.jpg" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Daniel Diemoz — Sviluppatore Web Freelance" },
+      { property: "og:site_name", content: "Daniel Diemoz" },
 
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Daniel Diemoz | Sviluppatore Web Freelance" },
       { name: "twitter:description", content: "Siti vetrina e aziendali professionali per il mercato italiano. Sviluppo web su misura." },
       { name: "twitter:image", content: "https://danieldiemoz.com/og-image.jpg" },
+      { name: "twitter:image:alt", content: "Daniel Diemoz — Sviluppatore Web Freelance" },
     ],
     links: [
       {
@@ -130,6 +135,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "stylesheet",
         href: appCss,
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Daniel Diemoz",
+          url: "https://danieldiemoz.com",
+          description: "Sviluppatore web freelance ad Aosta. Siti vetrina e aziendali professionali per il mercato italiano.",
+          inLanguage: "it",
+        }),
       },
     ],
   }),

@@ -41,7 +41,7 @@ export function Nav() {
   animate={{ backgroundPosition: ["100% 0%", "-100% 0%"] }}
   transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
 >
-  Daniel Diemoz
+<p>{'<zome/>'}</p>
 </motion.a>
       <nav className="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
         {LINKS.map((l) => (
@@ -50,7 +50,7 @@ export function Nav() {
           </a>
         ))}
       </nav>
-      <span className="hidden md:block font-mono-cap">&lt;zome/&gt;</span>
+      <div className="hidden md:block w-[72px]" aria-hidden="true" />
       <button
         className="md:hidden font-mono-cap"
         onClick={() => setOpen((o) => !o)}

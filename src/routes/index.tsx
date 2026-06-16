@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { useState, useRef, lazy, Suspense } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { Nav } from "@/components/Nav";
-import { RevealText, RevealOnScroll } from "@/components/Reveal";
+import { RevealOnScroll } from "@/components/Reveal";
 import work01 from "@/assets/work-01.webp";
 import work02 from "@/assets/work-02.webp";
 import work03 from "@/assets/work-03.webp";
@@ -19,15 +19,15 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Daniel Diemoz, sviluppatore web freelance in Italia. Realizzo siti vetrina e aziendali professionali, veloci e ottimizzati per convertire visitatori in clienti. Contattami per un preventivo gratuito.",
+          "Daniel Diemoz, sviluppatore web freelance ad Aosta. Realizzo siti vetrina e aziendali professionali, veloci e ottimizzati per convertire visitatori in clienti. Contattami per un preventivo gratuito.",
       },
       {
         property: "og:title",
-        content: "Daniel Diemoz | Sviluppatore Web Freelance — Siti Professionali per Aziende",
+        content: "Daniel Diemoz | Sviluppatore Web Freelance ad Aosta — Siti Professionali per Aziende",
       },
       {
         property: "og:description",
-        content: "Siti vetrina e aziendali professionali per il mercato italiano. Sviluppo web su misura.",
+        content: "Daniel Diemoz, sviluppatore web freelance. Siti vetrina e aziendali professionali per il mercato italiano. Sviluppo web su misura, design moderno, SEO e performance.",
       },
     ],
     scripts: [
@@ -36,10 +36,11 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "ProfessionalService",
-          name: "Daniel Diemoz — Sviluppo Web Freelance",
+          name: "Daniel Diemoz — Sviluppatore Web Freelance",
           url: "https://danieldiemoz.com",
           description:
-            "Sviluppatore web freelance in Italia. Realizzo siti vetrina e aziendali professionali per piccole e medie imprese.",
+            "Daniel Diemoz, sviluppatore web freelance ad Aosta. Realizzo siti vetrina e aziendali professionali per piccole e medie imprese italiane.",
+          image: "https://danieldiemoz.com/og-image.jpg",
           founder: {
             "@type": "Person",
             name: "Daniel Diemoz",
@@ -49,12 +50,17 @@ export const Route = createFileRoute("/")({
           address: {
             "@type": "PostalAddress",
             addressLocality: "Aosta",
+            addressRegion: "Valle d'Aosta",
             addressCountry: "IT",
+          },
+          areaServed: {
+            "@type": "Country",
+            name: "Italia",
           },
           contactPoint: {
             "@type": "ContactPoint",
             telephone: "+39-338-2313527",
-            email: "info@danieldiemoz.it",
+            email: "info@danieldiemoz.com",
             contactType: "customer service",
             availableLanguage: ["Italian"],
           },
@@ -165,99 +171,200 @@ function Index() {
 }
 
 
+const TECH_STACK = [
+  { icon: "◻", label: "REACT" },
+  { icon: "+", label: "NEXT.JS" },
+  { icon: "✦", label: "TYPESCRIPT" },
+  { icon: "◻", label: "TAILWIND CSS" },
+];
+
 function Hero() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setVisible(true), 100);
+    return () => clearTimeout(t);
+  }, []);
+
+  const fadeIn = (delay: number): React.CSSProperties => ({
+    opacity: visible ? 1 : 0,
+    transform: visible ? "translateY(0)" : "translateY(12px)",
+    transition: `opacity 0.6s ease ${delay}s, transform 0.6s ease ${delay}s`,
+  });
+
+  const nameStyle = (delay: number, weight: number, letterSpacing: string): React.CSSProperties => ({
+    ...fadeIn(delay),
+    fontSize: "clamp(64px, 14vw, 140px)",
+    fontWeight: weight,
+    lineHeight: 1,
+    margin: 0,
+    letterSpacing,
+    fontFamily: "var(--font-display)",
+  });
+
   return (
-    <section className="relative min-h-screen flex flex-col justify-end px-5 md:px-10 pb-12 pt-32 overflow-hidden">
+    <section className="relative min-h-screen flex items-center px-5 md:px-10 overflow-hidden">
       <div className="noise" />
-      <div
-        aria-hidden
-        className="absolute -right-40 top-1/4 w-[60vw] h-[60vw] rounded-full bg-blue-500/[0.03] blur-[150px] pointer-events-none"
-      />
-      <div
-        aria-hidden
-        className="absolute -right-10 top-1/4 w-[45vw] h-[35vw] opacity-[0.07] pointer-events-none hidden md:block"
+
+      <div className="relative z-10 w-full flex flex-col lg:flex-row lg:items-center justify-between gap-10 lg:gap-8 py-20 lg:py-0">
+        {/* ── Left: text content ── */}
+        <div className="flex flex-col lg:max-w-[55%]">
+          {/* Intro */}
+          <p
+            style={{
+              ...fadeIn(0),
+              fontSize: "clamp(14px, 2vw, 18px)",
+              color: "var(--color-muted-foreground)",
+              fontWeight: 400,
+              margin: "0 0 8px 0",
+              letterSpacing: "0.02em",
+            }}
+          >
+            Ciao, sono
+          </p>
+
+         <h1
         style={{
-          backgroundImage: "radial-gradient(currentColor 1.5px, transparent 1.5px)",
-          backgroundSize: "32px 32px",
+          fontSize: "clamp(64px, 14vw, 140px)",
+          fontWeight: 300,
+          lineHeight: 1,
+          margin: 0,
+          letterSpacing: "-0.02em",
+          opacity: visible ? 1 : 0,
+          transform: visible ? "translateY(0)" : "translateY(16px)",
+          transition: "opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s",
         }}
-      />
+      >
+        Daniel
+      </h1>
 
-      <motion.div
-        aria-hidden
-        className="absolute -left-20 top-24 w-[30vw] h-[30vw] border border-border"
-        animate={{ rotate: -360 }}
-        transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-      />
+          <h1
+        style={{
+          fontSize: "clamp(64px, 14vw, 140px)",
+          fontWeight: 800,
+          lineHeight: 1,
+          margin: "0 0 28px 0",
+          letterSpacing: "-0.03em",
+          opacity: visible ? 1 : 0,
+          transform: visible ? "translateY(0)" : "translateY(16px)",
+          transition: "opacity 0.6s ease 0.18s, transform 0.6s ease 0.18s",
+        }}
+      >
+        Diemoz
+      </h1>
 
-      <div className="relative">
+          {/* Badge */}
+          <div
+            style={{
+              ...fadeIn(0.28),
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "6px",
+              border: "1px solid var(--color-border)",
+              borderRadius: "6px",
+              padding: "6px 14px",
+              fontSize: "0.72rem",
+              fontFamily: "var(--font-mono)",
+              fontWeight: 600,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "var(--color-muted-foreground)",
+              width: "fit-content",
+              marginBottom: "36px",
+            }}
+          >
+            <span style={{ color: "var(--color-foreground)" }}>+</span> SVILUPPATORE WEB FREELANCE
+          </div>
+
+          {/* Description */}
+          <p
+            style={{
+              ...fadeIn(0.36),
+              fontSize: "clamp(16px, 2.2vw, 20px)",
+              color: "var(--color-muted-foreground)",
+              fontWeight: 400,
+              lineHeight: 1.6,
+              maxWidth: "520px",
+              margin: "0 0 40px 0",
+            }}
+          >
+            Sviluppatore web freelance ad Aosta. Realizzo siti vetrina e
+            aziendali professionali, ottimizzati per i motori di ricerca e
+            progettati per convertire i visitatori in clienti.
+          </p>
+
+          {/* CTA Buttons */}
+          <div
+            style={{
+              ...fadeIn(0.44),
+              display: "flex",
+              gap: "14px",
+              flexWrap: "wrap",
+              marginBottom: "52px",
+            }}
+          >
+            <a
+              href="#work"
+              className="group inline-flex items-center gap-2 rounded-lg bg-foreground text-background px-7 py-3.5 text-[15px] font-semibold tracking-[0.01em] hover:opacity-90 transition-opacity"
+            >
+              Vedi i miei lavori
+              <span className="text-lg transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+            </a>
+
+            <a
+              href="#contact"
+              className="inline-flex items-center rounded-lg border border-border text-foreground px-7 py-3.5 text-[15px] font-medium tracking-[0.01em] hover:border-foreground/50 transition-colors"
+            >
+              Contattami
+            </a>
+          </div>
+
+          {/* Tech stack tags */}
+          <div
+            style={{
+              ...fadeIn(0.52),
+              display: "flex",
+              gap: "10px",
+              flexWrap: "wrap",
+            }}
+          >
+            {TECH_STACK.map(({ icon, label }) => (
+              <span
+                key={label}
+                style={{
+                  border: "1px solid var(--color-border)",
+                  borderRadius: "6px",
+                  padding: "5px 12px",
+                  fontSize: "10px",
+                  fontFamily: "var(--font-mono)",
+                  fontWeight: 600,
+                  letterSpacing: "0.1em",
+                  color: "var(--color-muted-foreground)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                }}
+              >
+                <span style={{ fontSize: "12px" }}>{icon}</span>
+                {label}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Right: SplineScene 3D robot ── */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="font-mono-cap text-muted-foreground mb-8 flex justify-between"
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={visible ? { opacity: 1, scale: 1 } : {}}
+          transition={{ delay: 0.65, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="w-full lg:w-[45%] shrink-0"
         >
-          <span>Portfolio · 2026 — Indice</span>
-          <span className="hidden md:inline">Aosta · IT</span>
+          <div className="w-full max-w-[800px] mx-auto lg:mx-0 aspect-[16/9]">
+            <Suspense fallback={<div className="w-full h-full bg-muted/20 animate-pulse rounded-lg" />}>
+              <SplineScene scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" className="w-full h-full" />
+            </Suspense>
+          </div>
         </motion.div>
-
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <h1 className="font-display leading-[0.82] tracking-tight">
-            <div>
-              <RevealText
-                text="Daniel"
-                as="span"
-                className="text-[14vw] md:text-[8.3vw] font-normal bg-[linear-gradient(135deg,_#1a1a1a_0%,_#666_40%,_#555_60%,_#111_100%)] bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.18)]"
-                delay={0.3}
-              />
-            </div>
-            <div>
-              <RevealText
-                text="Diemoz"
-                as="span"
-                className="text-[14vw] md:text-[8.7vw] font-bold bg-[linear-gradient(135deg,_#555_0%,_#ccc_40%,_#ccc_60%,_#444_100%)] bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.18)]"
-                delay={0.5}
-              />
-            </div>
-          </h1>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.8, duration: 1 }}
-            className="w-full md:w-[520px] lg:w-[720px] shrink-0 md:relative md:-left-[150px] md:top-[0px]"
-          >
-            <div className="w-full max-w-[1000px] aspect-[16/9]">
-              <Suspense fallback={<div className="w-full h-full bg-muted/20 animate-pulse rounded-lg" />}>
-                <SplineScene scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" className="w-full h-full" />
-              </Suspense>
-            </div>
-
-          </motion.div>
-        </div>
-
-        <div className="mt-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.4, duration: 0.8 }}
-            className="max-w-md text-base md:text-lg text-muted-foreground"
-          >
-            Sviluppatore web freelance in Italia. Realizzo siti vetrina e aziendali professionali, progettati per far crescere la tua attività e trasformare i visitatori in clienti.          </motion.p>
-
-          <motion.a
-            href="#work"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.6 }}
-            className="font-mono-cap flex items-center gap-3 group"
-          >
-            <motion.span
-              className="block w-px h-12 bg-foreground origin-top"
-              animate={{ scaleY: [0, 1, 1, 0] }}
-              transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <span>Scorri verso il basso</span>
-          </motion.a>
-        </div>
       </div>
     </section>
   );
@@ -279,10 +386,10 @@ function About() {
 
         <RevealOnScroll className="md:col-span-4 md:col-start-9 md:pt-20 space-y-5" delay={0.25}>
           <p className="text-foreground/70 text-base leading-relaxed">
-            Sono Daniel Diemoz, sviluppatore web freelance con base ad Aosta. Aiuto piccole e medie imprese italiane a costruire la loro presenza online con siti web professionali, veloci e progettati per ottenere risultati concreti: più contatti, più clienti, più visibilità.
+            Sono Daniel Diemoz, sviluppatore web freelance con base ad Aosta. Aiuto piccole e medie imprese italiane a costruire la loro presenza online con siti professionali, veloci e ottimizzati per i motori di ricerca. L'obiettivo è semplice: trasformare il tuo sito web in uno strumento che porta risultati concreti — più contatti, più clienti, più fatturato.
           </p>
           <p className="text-foreground/70 text-base leading-relaxed">
-            Ogni sito che realizzo unisce design moderno, usabilità e performance tecniche. Mi occupo personalmente di ogni fase: dall'analisi delle esigenze alla pubblicazione online, con supporto continuo dopo il lancio.
+            Ogni progetto che seguo unisce design moderno, usabilità e performance tecniche. Mi occupo personalmente di ogni fase: dall'analisi delle tue esigenze alla pubblicazione online, con supporto continuo dopo il lancio.
           </p>
           <p className="text-foreground text-sm font-mono-cap tracking-widest pt-2 border-t border-foreground/10">
             Disponibile per nuovi progetti. Contattami per un preventivo gratuito.
@@ -437,11 +544,11 @@ function Contact() {
           <RevealOnScroll>
             <div className="font-mono-cap text-muted-foreground mb-3">Email diretta</div>
             <a
-              href="mailto:info@danieldiemoz.it"
+              href="mailto:info@danieldiemoz.com"
               className="font-display text-4xl md:text-6xl break-all border-b border-border pb-3 inline-block hover:border-foreground transition-colors"
               data-cursor-hover
             >
-              info@danieldiemoz.it
+              info@danieldiemoz.com
             </a>
           </RevealOnScroll>
 
@@ -468,7 +575,7 @@ function Contact() {
 
         <RevealOnScroll className="md:col-span-6 md:col-start-7" delay={0.2}>
           <p className="text-muted-foreground mb-6 leading-relaxed">
-            Raccontami il tuo progetto. Ti rispondo entro 24 ore con un preventivo personalizzato e senza impegno.
+            Hai un'idea o un progetto in mente? Raccontami cosa ti serve. Ti rispondo entro 24 ore con un preventivo personalizzato, chiaro e senza alcun impegno.
           </p>
           <ContactForm />
         </RevealOnScroll>
