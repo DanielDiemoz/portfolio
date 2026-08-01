@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { Link } from "@tanstack/react-router";
 
 const LINKS = [
-  { label: "Info", href: "#about" },
-  { label: "Lavori", href: "#work" },
-  { label: "Servizi", href: "#services" },
-  { label: "Contatti", href: "#contact" },
-];
+  { label: "Info", to: "/", hash: "about" },
+  { label: "Lavori", to: "/progetti" },
+  { label: "Servizi", to: "/", hash: "services" },
+  { label: "Contatti", to: "/", hash: "contact" },
+] as const;
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -27,38 +28,46 @@ export function Nav() {
     <>
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-          scrolled ? "backdrop-blur-md bg-background/60 border-b border-border" : ""
+          scrolled
+            ? "backdrop-blur-md bg-background/60 border-b border-border"
+            : ""
         }`}
       >
-      <div className="flex items-center justify-between px-5 md:px-10 py-5 relative">
-      <motion.a
-  href="#top"
-  className="font-display text-2xl tracking-wide leading-none font-normal bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.18)]"
-  style={{
-    backgroundImage: "linear-gradient(90deg, #fff 0%, #fff 30%, #aaa 50%, #fff 70%, #fff 100%)",
-    backgroundSize: "200% 100%",
-  }}
-  animate={{ backgroundPosition: ["100% 0%", "-100% 0%"] }}
-  transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
->
-<p>{'<zome/>'}</p>
-</motion.a>
-      <nav className="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
-        {LINKS.map((l) => (
-          <a key={l.href} href={l.href} className="font-mono-cap hover:opacity-60 transition-opacity">
-            {l.label}
-          </a>
-        ))}
-      </nav>
-      <div className="hidden md:block w-[72px]" aria-hidden="true" />
-      <button
-        className="md:hidden font-mono-cap"
-        onClick={() => setOpen((o) => !o)}
-        aria-label="Menu"
-      >
-        {open ? "Chiudi" : "Menu"}
-      </button>
-    </div>
+        <div className="flex items-center justify-between px-5 md:px-10 py-5 relative">
+          <motion.a
+            href="/#top"
+            className="font-display text-2xl tracking-wide leading-none font-normal bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.18)]"
+            style={{
+              backgroundImage:
+                "linear-gradient(90deg, #fff 0%, #fff 30%, #aaa 50%, #fff 70%, #fff 100%)",
+              backgroundSize: "200% 100%",
+            }}
+            animate={{ backgroundPosition: ["100% 0%", "-100% 0%"] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+          >
+            <p>{"<zome/>"}</p>
+          </motion.a>
+          <nav className="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
+            {LINKS.map((l) => (
+              <Link
+                key={l.label}
+                to={l.to}
+                hash={"hash" in l ? l.hash : undefined}
+                className="font-mono-cap hover:opacity-60 transition-opacity"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+          <div className="hidden md:block w-[72px]" aria-hidden="true" />
+          <button
+            className="md:hidden font-mono-cap"
+            onClick={() => setOpen((o) => !o)}
+            aria-label="Menu"
+          >
+            {open ? "Chiudi" : "Menu"}
+          </button>
+        </div>
       </header>
 
       <AnimatePresence>
@@ -73,18 +82,19 @@ export function Nav() {
             <ul className="space-y-6">
               {LINKS.map((l, i) => (
                 <motion.li
-                  key={l.href}
+                  key={l.label}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 + i * 0.08 }}
                 >
-                  <a
-                    href={l.href}
+                  <Link
+                    to={l.to}
+                    hash={"hash" in l ? l.hash : undefined}
                     onClick={() => setOpen(false)}
                     className="font-display text-6xl block"
                   >
                     {l.label}
-                  </a>
+                  </Link>
                 </motion.li>
               ))}
             </ul>

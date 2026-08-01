@@ -3,12 +3,6 @@ import { motion } from "motion/react";
 import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { Nav } from "@/components/Nav";
 import { RevealOnScroll } from "@/components/Reveal";
-import work01 from "@/assets/work-01.webp";
-import work02 from "@/assets/work-02.webp";
-import work03 from "@/assets/work-03.webp";
-import work04 from "@/assets/work-04.webp";
-import work05 from "@/assets/work-05.webp";
-import work06 from "@/assets/work-06.webp";
 const SplineScene = lazy(() =>
   import("@/components/ui/splite").then((m) => ({ default: m.SplineScene }))
 );
@@ -102,15 +96,6 @@ export const Route = createFileRoute("/")({
 });
 
 
-const PROJECTS = [
-  { n: "01", title: "Atlante", cat: "Brand · Web", img: work01, span: "md:col-span-7 md:row-span-2", desc: "Identità e sito per uno studio di architettura milanese.", alt: "Sito web aziendale per studio di architettura Milano — realizzato da Daniel Diemoz", ratio: "aspect-[4/5]" },
-  { n: "02", title: "Nodo", cat: "Mobile · UX", img: work02, span: "md:col-span-5", desc: "App di mindfulness con interfaccia tattile e minimale.", alt: "App mobile mindfulness con design UI/UX minimalista — Daniel Diemoz", ratio: "aspect-[4/3]" },
-  { n: "03", title: "Forma", cat: "Editorial", img: work03, span: "md:col-span-5", desc: "Rivista digitale indipendente di cultura visiva.", alt: "Rivista digitale indipendente di cultura visiva — design editoriale Daniel Diemoz", ratio: "aspect-[4/3]" },
-  { n: "04", title: "Vetro", cat: "Web · Motion", img: work04, span: "md:col-span-6", desc: "E-commerce per un brand di occhiali artigianali.", alt: "E-commerce artigianale per brand occhiali — design web Daniel Diemoz", ratio: "aspect-[4/5]" },
-  { n: "05", title: "Sale", cat: "Identità", img: work05, span: "md:col-span-6", desc: "Sistema d'identità per un ristorante di alta cucina.", alt: "Brand identity per ristorante di alta cucina — Daniel Diemoz", ratio: "aspect-[4/3]" },
-  { n: "06", title: "Orbita", cat: "Dashboard · SaaS", img: work06, span: "md:col-span-12", desc: "Piattaforma analytics per agenzie creative.", alt: "Dashboard analytics SaaS per agenzie creative — Daniel Diemoz", ratio: "aspect-[16/9]" },
-];
-
 const SERVICES = [
 
   {
@@ -162,7 +147,6 @@ function Index() {
       <Nav />
       <Hero />
       <About />
-      <Portfolio />
       <Services />
       <Contact />
       <Footer />
@@ -395,60 +379,6 @@ function About() {
         ))}
       </div>
     </section>
-  );
-}
-
-function Portfolio() {
-  return (
-    <section id="work" className="px-5 md:px-10 py-32 md:py-48 border-t border-border">
-      <div className="mb-24">
-        <RevealOnScroll>
-          <div className="font-mono-cap text-muted-foreground mb-4">(02) — Lavori selezionati</div>
-          <h2 className="font-display text-[14vw] md:text-[7vw] leading-[0.85]">Progetti web realizzati</h2>
-        </RevealOnScroll>
-      </div>
-
-      <div className="flex flex-col gap-36 md:gap-56">
-        {PROJECTS.map((p, i) => (
-          <RevealOnScroll key={p.n}>
-            <ProjectCard project={p} index={i} />
-          </RevealOnScroll>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function ProjectCard({ project, index }: { project: (typeof PROJECTS)[number]; index: number }) {
-  const isEven = index % 2 === 0;
-  return (
-    <div className={`grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center`}>
-      {/* Immagine */}
-      <div className={`relative overflow-hidden md:col-span-6 ${project.ratio} bg-muted ${!isEven ? "md:order-2" : ""}`}>
-        <motion.img
-          src={project.img}
-          alt={project.alt}
-          loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover grayscale"
-          whileHover={{ scale: 1.04 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        />
-      </div>
-
-      {/* Testo */}
-      <div className={`flex flex-col justify-center md:col-span-6 space-y-8 ${!isEven ? "md:order-1" : ""}`}>
-        <div className="font-mono-cap text-muted-foreground">{project.n} · {project.cat}</div>
-        <h3 className="font-display text-6xl md:text-7xl leading-[0.92]">{project.title}</h3>
-        <p className="text-muted-foreground text-lg leading-relaxed max-w-xs">{project.desc}</p>
-        <a
-          href="#contact"
-          className="font-mono-cap inline-block border-b border-foreground pb-1 w-fit hover:opacity-60 transition-opacity"
-          data-cursor-hover
-        >
-          Vedi progetto →
-        </a>
-      </div>
-    </div>
   );
 }
 
